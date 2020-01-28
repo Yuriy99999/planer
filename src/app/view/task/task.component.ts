@@ -22,7 +22,7 @@ export class TaskComponent implements OnInit, AfterViewInit  {
 
   ngOnInit() {
    // this.tasks = this.dataHandler.getTasks();
-    this.dataHandler.taskSubject.subscribe(tasks => this.tasks = tasks);
+    this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
 
     this.dataSource = new MatTableDataSource();
 
