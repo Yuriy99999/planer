@@ -4,6 +4,7 @@ import {TestData} from '../data/TestData';
 import { Task } from '../model/task';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {TaskDAOArrayImpl} from '../dao/impl/task-daoarray-impl';
+import {CategoryDAOArrayImpl} from '../dao/impl/category-daoarray-impl';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {TaskDAOArrayImpl} from '../dao/impl/task-daoarray-impl';
 export class DataHandlerService {
 
     private taskDaoArray = new TaskDAOArrayImpl();
-   // private categoryDaoArray = new CategoryDAOArray();
+    private categoryDaoArray = new CategoryDAOArrayImpl();
 
 
   constructor() {
@@ -20,4 +21,8 @@ export class DataHandlerService {
     getAllTasks(): Observable<Task[]> {
     return this.taskDaoArray.getAll();
   }
+
+    getAllCategories(): Observable<Category[]> {
+    return this.categoryDaoArray.getAll();
+   }
 }
