@@ -58,7 +58,7 @@ export class TaskComponent implements OnInit, AfterViewInit  {
   }
 
   private refreshTable() {
-
+    if (!this.dataSource){ return;}
     this.dataSource.data = this.tasks; // обновить источник данных (т.к. данные массива tasks обновились)
 
     this.addTableObjects();
