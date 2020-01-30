@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { Task } from 'src/app/model/task';
 import {DataHandlerService} from '../../service/data-handler.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -16,13 +16,21 @@ export class TaskComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator, {static: false}) private paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) private sort: MatSort;
 
-  tasks: Task[];
+  //@Input()
+  private tasks: Task[];
+
+  @Input('tasks')
+  private set setTasks(tasks: Task[]) { // напрямую не присваиваем значения в переменную, только через @Input
+    this.tasks = tasks;
+    this.refreshTable();
+  }
+
 
   constructor(private dataHandler: DataHandlerService) { }
 
   ngOnInit() {
    // this.tasks = this.dataHandler.getTasks();
-    this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
+    //this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
 
 
 
