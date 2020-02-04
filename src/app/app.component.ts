@@ -41,5 +41,9 @@ export class AppComponent {
     });
 
   }
+
+  onUpdateTask(task: Task) {
+    console.log(task);
+  }
 }
 
