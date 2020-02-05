@@ -1,12 +1,12 @@
 
 import {Observable, of} from 'rxjs';
-// @ts-ignore
-import {TaskDAO} from '../interface/TaskDAO';
+
 import {Task} from '../../model/Task';
 import {Category} from '../../model/Category';
 // @ts-ignore
 import {Priority} from '../../model/Priority';
 import {TestData} from '../../data/TestData';
+import {TaskDAO} from '../interface/task-dao';
 
 
 export class TaskDAOArrayImpl implements TaskDAO {
@@ -14,8 +14,8 @@ export class TaskDAOArrayImpl implements TaskDAO {
 
   getAll(): Observable<Task[]> {
     return of(TestData.tasks);
+    // return of(TestData.tasks);
   }
-
 
 
 
@@ -31,13 +31,9 @@ export class TaskDAOArrayImpl implements TaskDAO {
     return undefined;
   }
 
-
-
-  getTaskByCategory(category: Category): Observable<Task[]> {
+  getTasksByCategory(category:Category): Observable<Task[]>{
     return of(TestData.tasks.filter(task => task.category === category));
   }
-
-
 
   getCompletedCountInCategory(category: Category): Observable<number> {
     return undefined;
@@ -54,7 +50,6 @@ export class TaskDAOArrayImpl implements TaskDAO {
   getUncompletedCountInCategory(category: Category): Observable<number> {
     return undefined;
   }
-
   // поиск задач по параметрам
   // если значение null - параметр не нужно учитывать при поиске
   search(category: Category, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
@@ -76,8 +71,13 @@ export class TaskDAOArrayImpl implements TaskDAO {
     return allTasks; // отфильтрованный массив
   }
 
-  update(T): Observable<Task> {
-    return undefined;
+  update(task: Task): Observable<Task> {
+
+    const taskTmp = TestData.tasks.find(t => t.id === task.id); // обновляем по id
+    TestData.tasks.splice(TestData.tasks.indexOf(taskTmp), 1, task);
+    console.log(TestData.tasks);
+    return of(task);
+
   }
 
 

@@ -42,8 +42,18 @@ export class AppComponent {
 
   }
 
-  onUpdateTask(task: Task) {
+  openEditTaskDialog(task: Task) {
     console.log(task);
+    this.dataHandler.updateTask(task).subscribe(() => {
+      this.dataHandler.searchTasks(
+        this.selectedCategory,
+        null,
+        null,
+        null
+      ).subscribe(tasks => {
+        this.tasks = tasks;
+      });
+    });
   }
 }
 
