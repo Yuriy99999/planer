@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DataHandlerService} from '../../service/data-handler.service';
 import {Task} from '../../model/task';
 import {Category} from '../../model/category';
+import {Priority} from '../../model/priorioty';
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -17,9 +18,10 @@ export class EditTaskDialogComponent implements OnInit {
   private tmpTitle: string;
 
   private categories: Category[];
-
+  private priorities: Priority[];
 
   private tmpCategory: Category;
+  private tmpPriority: Priority;
 
 
   constructor(
@@ -38,7 +40,10 @@ export class EditTaskDialogComponent implements OnInit {
     //console.log(this.task);
     //console.log(this.dialogTitle);
     this.tmpCategory = this.task.category;
+    this.tmpPriority = this.task.priority;
+
     this.dataHandler.getAllCategories().subscribe(items => this.categories = items);
+    this.dataHandler.getAllPriorities().subscribe(items => this.priorities = items);
 
     // инициализация начальных значений (записывам в отдельные переменные
     // чтобы можно было отменить изменения, а то будут сразу записываться в задачу)
@@ -52,6 +57,8 @@ export class EditTaskDialogComponent implements OnInit {
     // считываем все значения для сохранения в поля задачи
     this.task.name = this.tmpTitle;
     this.task.category = this.tmpCategory;
+    this.task.priority = this.tmpPriority;
+    //дописати для пріоритетів
 
 
 

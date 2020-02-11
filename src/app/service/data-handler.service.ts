@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {TaskDAOArrayImpl} from '../dao/impl/task-daoarray-impl';
 import {CategoryDAOArrayImpl} from '../dao/impl/category-daoarray-impl';
 import {Priority} from '../model/priorioty';
-import {PriorityDaoArrayImpl} from '../dao/impl/priority-dao-array-impl';
+import {PriorityDAOArrayImpl} from '../dao/impl/priority-dao-array-impl';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class DataHandlerService {
 
   private taskDaoArray = new TaskDAOArrayImpl();
   private categoryDaoArray = new CategoryDAOArrayImpl();
-  private priorityDaoArray = new PriorityDaoArrayImpl();
+  private priorityDaoArray = new PriorityDAOArrayImpl();
 
   constructor() {
   }
@@ -28,7 +28,7 @@ export class DataHandlerService {
     return this.taskDaoArray.getAll();
   }
 
-    getAllCategories(): Observable<Category[]> {
+    getAllCategories(): Observable<Category[]> { //для select
     return this.categoryDaoArray.getAll();
    }
 
@@ -39,5 +39,9 @@ export class DataHandlerService {
 
   updateTask(task: Task): Observable<Task> {
     return this.taskDaoArray.update(task);
+  }
+
+  getAllPriorities() {
+    return this.priorityDaoArray.getAll();
   }
 }
