@@ -71,6 +71,22 @@
 
   <button (click)="onCancel()" mat-raised-button>Отмена</button>
 
+  <button mat-raised-button color="accent"
+    *ngIf="!task.completed"
+    (click)="complete()"
+  >
+    Завершить задачу
+  </button>
+
+  <button
+    mat-raised-button color="accent"
+    (click)="activate()"
+    *ngIf="task.completed">
+
+    Активировать
+
+  </button>
+
   <button mat-raised-button color="warn" (click)="delete()">Удалить задачу</button>
 
 

@@ -29,6 +29,9 @@ export class TaskComponent implements OnInit, AfterViewInit  {
   @Output()
   updateTask = new EventEmitter<Task>();
 
+  @Output()
+  deleteTask = new EventEmitter<Task>();
+
 
   constructor(private dataHandler: DataHandlerService, private dialog: MatDialog) { }
 
@@ -108,6 +111,8 @@ export class TaskComponent implements OnInit, AfterViewInit  {
     this.updateTask.emit(task);
   }
 
+
+
   openEditTaskDialog(task: Task) {
     // открытие диалогового окна
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
@@ -117,6 +122,11 @@ export class TaskComponent implements OnInit, AfterViewInit  {
 
     dialogRef.afterClosed().subscribe(result => {
       // обработка результатов
+
+      if (result === 'delete') {
+        this.deleteTask.emit(task);
+        return;
+      }
 
       if (result as Task) { // если нажали ОК и есть результат
         this.updateTask.emit(task);

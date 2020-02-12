@@ -44,4 +44,8 @@ export class DataHandlerService {
   getAllPriorities() {
     return this.priorityDaoArray.getAll();
   }
+
+  deleteTask(id: number) {
+    return this.taskDaoArray.delete(id);
+  }
 }

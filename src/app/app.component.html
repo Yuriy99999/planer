@@ -73,7 +73,9 @@
     </nav>
     <!-- End Navbar -->
     <div class="content">
-    <app-task [tasks]="tasks" (updateTask) = "openEditTaskDialog($event)"></app-task>
+    <app-task [tasks]="tasks"
+              (deleteTask)="onDeleteTask($event)"
+              (updateTask) = "openEditTaskDialog($event)"></app-task>
     </div>
     <footer class="footer">
       <div class="container-fluid">

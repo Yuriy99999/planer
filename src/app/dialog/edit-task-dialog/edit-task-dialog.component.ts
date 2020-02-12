@@ -89,6 +89,7 @@ export class EditTaskDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+
         this.dialogRef.close('delete'); // нажали удалить
       }
     });
