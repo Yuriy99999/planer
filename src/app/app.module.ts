@@ -7,7 +7,7 @@ import {DataHandlerService} from './service/data-handler.service';
 import { TaskComponent } from './view/task/task.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatDatepickerModule,
+  MatButtonModule, MatCheckboxModule, MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
@@ -19,6 +19,12 @@ import {
 import { EditTaskDialogComponent } from './dialog/edit-task-dialog/edit-task-dialog.component';
 import {FormsModule} from '@angular/forms';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { TaskDatePipe } from './pipe/task-date.pipe';
+
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
 
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     CategoriesComponent,
     TaskComponent,
     EditTaskDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TaskDatePipe
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     MatOptionModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [DataHandlerService],
   entryComponents: [EditTaskDialogComponent, ConfirmDialogComponent],
