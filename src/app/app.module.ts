@@ -7,11 +7,11 @@ import {DataHandlerService} from './service/data-handler.service';
 import { TaskComponent } from './view/task/task.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule,
+  MatButtonModule, MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatOptionModule,
+  MatInputModule, MatNativeDateModule, MatOptionModule,
   MatPaginatorModule, MatSelectModule,
   MatSortModule,
   MatTableModule
@@ -41,7 +41,9 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     MatButtonModule,
     MatIconModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [DataHandlerService],
   entryComponents: [EditTaskDialogComponent, ConfirmDialogComponent],

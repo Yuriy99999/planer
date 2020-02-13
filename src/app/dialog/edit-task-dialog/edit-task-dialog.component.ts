@@ -23,6 +23,7 @@ export class EditTaskDialogComponent implements OnInit {
 
   private tmpCategory: Category;
   private tmpPriority: Priority;
+  private tmpDate: Date;
 
 
   constructor(
@@ -43,6 +44,7 @@ export class EditTaskDialogComponent implements OnInit {
     //console.log(this.dialogTitle);
     this.tmpCategory = this.task.category;
     this.tmpPriority = this.task.priority;
+    this.tmpDate = this.task.date;
 
     this.dataHandler.getAllCategories().subscribe(items => this.categories = items);
     this.dataHandler.getAllPriorities().subscribe(items => this.priorities = items);
@@ -60,6 +62,7 @@ export class EditTaskDialogComponent implements OnInit {
     this.task.name = this.tmpTitle;
     this.task.category = this.tmpCategory;
     this.task.priority = this.tmpPriority;
+    this.task.date = this.tmpDate;
     //дописати для пріоритетів
 
 
@@ -93,5 +96,16 @@ export class EditTaskDialogComponent implements OnInit {
         this.dialogRef.close('delete'); // нажали удалить
       }
     });
+  }
+
+  // нажали Выполнить (завершить) задачу
+  private complete() {
+    this.dialogRef.close('complete');
+
+  }
+
+  // делаем статус задачи "незавершенным" (активируем)
+  private activate() {
+    this.dialogRef.close('activate');
   }
 }
