@@ -16,6 +16,12 @@ export class CategoriesComponent implements OnInit {
 
   selectedCategory: Category;
 
+  @Output()
+  deleteCategory = new EventEmitter<Category>();
+
+  @Output()
+  updateCategory = new EventEmitter<Category>()
+
 
 
 

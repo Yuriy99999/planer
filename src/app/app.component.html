@@ -1,8 +1,17 @@
 <div class="wrapper ">
 
 
-  <app-categories (selectCategory)="onSelectCategory($event)" [categories]="categories"></app-categories>
+  <app-categories
+    (selectCategory)="onSelectCategory($event)"
+    (deleteCategory)="onDeleteCategory($event)"
 
+    [categories]="categories">
+
+  </app-categories>
+  <!--(deleteCategory)="onDeleteCategory($event)"
+      (updateCategory)="onUpdateCategory($event)"
+
+      [selectedCategory]="selectedCategory"-->
 
 
   <div class="main-panel">
@@ -73,9 +82,22 @@
     </nav>
     <!-- End Navbar -->
     <div class="content">
-    <app-task [tasks]="tasks"
-              (deleteTask)="onDeleteTask($event)"
-              (updateTask) = "openEditTaskDialog($event)"></app-task>
+    <app-task
+                           (updateTask)="onUpdateTask($event)"
+                           (deleteTask)="onDeleteTask($event)"
+                           (selectCategory)="onSelectCategory($event)"
+                           (addTask)="onAddTask($event)"
+
+
+                           [selectedCategory]="selectedCategory"
+                           (filterByTitle)="onSearchTasks($event)"
+                           (filterByPriority)="onFilterByPriority($event)"
+                           (filterByStatus)="onFilterTasksByStatus($event)"
+
+                           [tasks]="tasks"
+                           [priorities]="priorities">
+    </app-task>
+
     </div>
     <footer class="footer">
       <div class="container-fluid">
