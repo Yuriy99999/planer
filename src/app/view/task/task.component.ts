@@ -6,6 +6,7 @@ import {EditTaskDialogComponent} from '../../dialog/edit-task-dialog/edit-task-d
 import {ConfirmDialogComponent} from '../../dialog/confirm-dialog/confirm-dialog.component';
 import {Priority} from '../../model/priorioty';
 import {Category} from '../../model/category';
+import {OperType} from '../../dialog/oper-type.enum';
 
 
 @Component({
@@ -241,7 +242,9 @@ export class TaskComponent implements OnInit, AfterViewInit  {
     // то же самое, что и при редактировании, но только передаем пустой объект Task
     const task = new Task(null, '', false, null, this.selectedCategory);
 
-    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, 'Добавление задачи']});
+
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, 'Добавление задачи', OperType.ADD]});
+
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) { // если нажали ОК и есть результат
@@ -250,4 +253,6 @@ export class TaskComponent implements OnInit, AfterViewInit  {
     });
 
   }
+
+
 }

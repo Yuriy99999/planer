@@ -22,6 +22,10 @@ export class CategoriesComponent implements OnInit {
   @Output()
   updateCategory = new EventEmitter<Category>()
 
+  // добавили категорию
+  @Output()
+  addCategory = new EventEmitter<string>(); // передаем только название новой категории
+
 
 
 
@@ -49,6 +53,18 @@ export class CategoriesComponent implements OnInit {
 
         // вызываем внешний обработчик и передаем туда выбранную категорию
         this.selectCategory.emit(this.selectedCategory);
+  }
+
+  // диалоговое окно для добавления категории
+  private openAddDialog() {
+
+    const dialogRef = this.dialog.open(EditCategoryDialogComponent, {data: ['', 'Добавление категории', OperType.ADD], width: '400px'});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addCategory.emit(result as string); // вызываем внешний обработчик
+      }
+    });
   }
 
 }
