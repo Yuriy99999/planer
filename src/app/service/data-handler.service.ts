@@ -60,4 +60,14 @@ export class DataHandlerService {
   deleteCategory(id: number): Observable<Category> {
     return this.categoryDaoArray.delete(id);
   }
+
+  addCategory(title:string):Observable<Category>{
+    // @ts-ignore
+    return this.categoryDaoArray.add(new Category(null, title));
+
+  }
+
+  searchCategories(title: string): Observable<Category[]> {
+    return this.categoryDaoArray.search(title);
+  }
 }

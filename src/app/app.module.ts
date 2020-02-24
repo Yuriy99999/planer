@@ -23,6 +23,7 @@ import { TaskDatePipe } from './pipe/task-date.pipe';
 
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { EditCategoryDialogComponent } from './dialog/edit-category-dialog/edit-category-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -33,7 +34,8 @@ registerLocaleData(localeRu);
     TaskComponent,
     EditTaskDialogComponent,
     ConfirmDialogComponent,
-    TaskDatePipe
+    TaskDatePipe,
+    EditCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ registerLocaleData(localeRu);
     MatCheckboxModule
   ],
   providers: [DataHandlerService],
-  entryComponents: [EditTaskDialogComponent, ConfirmDialogComponent],
+  entryComponents: [EditTaskDialogComponent, ConfirmDialogComponent, EditCategoryDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

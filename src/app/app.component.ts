@@ -11,22 +11,20 @@ import {Priority} from './model/priorioty';
 })
 export class AppComponent {
   title = 'planer';
-
   tasks: Task[];
   categories: Category[];
   private priorities: Priority[]; // все приоритеты
-
-
   private selectedCategory: Category = null;
 
   // поиск
   private searchTaskText = ''; // текущее значение для поиска задач
 
+
+
   // фильтрация
-
-  private statusFilter: boolean;
   private priorityFilter: Priority;
-
+  private statusFilter: boolean;
+  private searchCategoryText: string;
 
 
   constructor(
@@ -156,6 +154,25 @@ export class AppComponent {
   private onUpdateCategory(category: Category) {
     this.dataHandler.updateCategory(category).subscribe(() => {
       this.onSelectCategory(this.selectedCategory);
+    });
+  }
+
+  // добавление категории
+  private onAddCategory(title: string) {
+    this.dataHandler.addCategory(title).subscribe(() => this.updateCategories());
+  }
+
+  private updateCategories() {
+    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+  }
+
+  // поиск категории
+  private onSearchCategory(title: string) {
+
+    this.searchCategoryText = title;
+
+    this.dataHandler.searchCategories(title).subscribe(categories => {
+      this.categories = categories;
     });
   }
 }
