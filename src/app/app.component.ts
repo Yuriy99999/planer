@@ -3,6 +3,7 @@ import { Task } from './model/task';
 import {Category} from './model/category';
 import {DataHandlerService} from './service/data-handler.service';
 import {Priority} from './model/priorioty';
+import {zip} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,13 @@ export class AppComponent {
 
   // поиск
   private searchTaskText = ''; // текущее значение для поиска задач
+
+  // статистика
+  private totalTasksCountInCategory: number;
+  private completedCountInCategory: number;
+  private uncompletedCountInCategory: number;
+  private uncompletedTotalTasksCount: number;
+
 
 
 
@@ -36,6 +44,7 @@ export class AppComponent {
     this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
     this.onSelectCategory(null);
+    this.updateTasksAndStat();
     //this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
   }
 
@@ -51,6 +60,7 @@ export class AppComponent {
     ).subscribe(tasks => {
       this.tasks = tasks;
     });
+    this.updateTasksAndStat();
 
   }
 
@@ -107,6 +117,7 @@ export class AppComponent {
     ).subscribe((tasks: Task[]) => {
       this.tasks = tasks;
     });
+
   }
 
   onFilterByPriority(priority: Priority) {
@@ -128,6 +139,7 @@ export class AppComponent {
         this.tasks = tasks;
       });
     });
+    this.updateTasksAndStat();
 
   }
 
@@ -135,7 +147,7 @@ export class AppComponent {
 
     this.dataHandler.addTask(task).subscribe(result => {
 
-      this.updateTasks();
+      this.updateTasksAndStat();
 
     });
 
@@ -148,6 +160,7 @@ export class AppComponent {
       this.selectedCategory = null; // открываем категорию "Все"
       this.onSelectCategory(this.selectedCategory);
     });
+    this.updateTasksAndStat();
   }
 
   // обновлении категории
@@ -174,6 +187,33 @@ export class AppComponent {
     this.dataHandler.searchCategories(title).subscribe(categories => {
       this.categories = categories;
     });
+  }
+
+
+  // показывает задачи с применением всех текущий условий (категория, поиск, фильтры и пр.)
+  private updateTasksAndStat() {
+
+    this.updateTasks(); // обновить список задач
+
+    // обновить переменные для статистики
+    this.updateStat();
+
+  }
+
+  // обновить статистику
+  private updateStat() {
+    zip(
+      this.dataHandler.getTotalCountInCategory(this.selectedCategory),
+      this.dataHandler.getCompletedCountInCategory(this.selectedCategory),
+      this.dataHandler.getUncompletedCountInCategory(this.selectedCategory),
+      this.dataHandler.getUncompletedTotalCount())
+
+      .subscribe(array => {
+        this.totalTasksCountInCategory = array[0];
+        this.completedCountInCategory = array[1];
+        this.uncompletedCountInCategory = array[2];
+        this.uncompletedTotalTasksCount = array[3]; // нужно для категории Все
+      });
   }
 }
 

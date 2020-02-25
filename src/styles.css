@@ -13,3 +13,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 40px !important;
 }
 
+.header-icon {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.settings button{
+  margin-right: 0;
+}
+
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.line {
+  border-bottom: 1px solid #dadada;
+  padding-top: 20px;
+}
+
+.gray {
+  color: #8f8f8f;
+}
+
+.main-panel > .content{
+  margin-top: 30px !important;
+}
+
+app-header{
+  width: 100%;
+}
+
+
