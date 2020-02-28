@@ -9,6 +9,10 @@
 
     (addCategory)="onAddCategory($event)"
 
+    [categoryMap]="categoryMap"
+
+    [uncompletedTotal]="uncompletedTotalTasksCount"
+
     (searchCategory)="onSearchCategory($event)"
 
     [selectedCategory]="selectedCategory"
@@ -61,7 +65,11 @@
                            (filterByStatus)="onFilterTasksByStatus($event)"
 
                            [tasks]="tasks"
-                           [priorities]="priorities">
+                           [priorities]="priorities"
+
+    >
+
+
     </app-task>
           </div>
         </div>
